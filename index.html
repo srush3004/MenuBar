@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TastyBite | Food Nav</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      .nav-links li:hover > a 
+      {
+       color: #ffcc00;
+       text-decoration: underline;
+      }
+
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff5f0;
+      color: #333;
+    }
+
+    nav {
+      background: #8B0000;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 0.7s ease-in-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ffcc00;
+    }
+
+    .nav-items {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .nav-links li a:hover {
+      color: #ffcc00;
+    }
+
+   .dropdown {
+  display: none;
+  flex-direction: column;
+  background: #aa1c1c;
+  border-radius: 5px;
+  padding: 0.5rem 0;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  min-width: 150px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.dropdown.show {
+  display: flex;
+}
+
+
+.nav-links li:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
+    .nav-links li:hover .dropdown {
+      display: flex;
+    }
+
+    .dropdown a {
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .dropdown a:hover {
+      background: #ffcc00;
+      color: #8B0000;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 6px 10px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      width: 180px;
+      font-size: 0.9rem;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-items {
+        flex-direction: column;
+        align-items: flex-start;
+        background: #8B0000;
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.4s ease-in-out;
+      }
+
+      .nav-items.show {
+        max-height: 400px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .dropdown {
+        position: relative;
+        top: 0;
+        box-shadow: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .search-box {
+        padding: 0 1rem 1rem;
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    section {
+      padding: 100px 30px;
+      text-align: center;
+    }
+
+    section:nth-child(even) {
+      background: #ffece1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #8B0000;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">TastyBite 🍕</div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-items" id="navItems">
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li>
+          <a href="#">Menu ▾</a>
+          <div class="dropdown">
+            <a href="#">Pizzas</a>
+            <a href="#">Burgers</a>
+            <a href="#">Drinks</a>
+          </div>
+        </li>
+        <li>
+          <a href="#">Deals ▾</a>
+          <div class="dropdown">
+            <a href="#">Combo Offers</a>
+            <a href="#">Student Deals</a>
+            <a href="#">Weekend Specials</a>
+          </div>
+        </li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="search-box">
+        <input type="text" placeholder="Search food..." />
+      </div>
+    </div>
+  </nav>
+  <ul class="nav-links">
+  <li>
+    <a href="#" class="dropdown-toggle">Menu ▾</a>
+    <div class="dropdown">
+      <a href="#">Pizzas</a>
+      <a href="#">Burgers</a>
+      <a href="#">Drinks</a>
+    </div>
+  </li>
+  <li>
+    <a href="#" class="dropdown-toggle">Deals ▾</a>
+    <div class="dropdown">
+      <a href="#">Combo Offers</a>
+      <a href="#">Student Deals</a>
+      <a href="#">Weekend Specials</a>
+    </div>
+  </li>
+</ul>
+
+
+  <!-- SECTIONS -->
+  <section id="home">
+    <h1>Welcome to TastyBite</h1>
+    <p>Your go-to place for delicious pizzas, sizzling burgers, and irresistible offers. Order now and enjoy a burst of flavors!</p>
+  </section>
+
+  <section>
+    <h1>Why Choose Us?</h1>
+    <p>Fresh ingredients, handcrafted recipes, fast delivery, and unmatched taste. Join thousands of food lovers who trust TastyBite!</p>
+  </section>
+
+  <section id="contact">
+    <h1>Contact Us</h1>
+    <p>Reach us at support@tastybite.com or call +91-9876543210. We deliver happiness 7 days a week!</p>
+  </section>
+
+  <!-- SCRIPT -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navItems = document.getElementById('navItems');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navItems.classList.toggle('show');
+    });
+  </script>
+
+</body>
+</html>
